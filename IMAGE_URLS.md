@@ -1,0 +1,15 @@
+# URLs des images CDN - EcoMax Energie
+
+## Logo
+- Logo: https://d2xsxph8kpxj0f.cloudfront.net/310519663308445010/WFcpuDgACN7X6A3ZWGjPoj/logo_2d393ea4.jpg
+
+## Images principales
+1. Solaire résidentielle: https://d2xsxph8kpxj0f.cloudfront.net/310519663308445010/WFcpuDgACN7X6A3ZWGjPoj/634067163_122201240456583875_208164599548861619_n_60caa5d2.jpg
+2. Solaire industrielle: https://d2xsxph8kpxj0f.cloudfront.net/310519663308445010/WFcpuDgACN7X6A3ZWGjPoj/635791549_122201348168583875_6707159912401281190_n_3c472e96.jpg
+3. Solaire commerciale: https://d2xsxph8kpxj0f.cloudfront.net/310519663308445010/WFcpuDgACN7X6A3ZWGjPoj/645210920_122203592006583875_8306250731478081547_n_bef29a96.jpg
+4. Solaire agricole: https://d2xsxph8kpxj0f.cloudfront.net/310519663308445010/WFcpuDgACN7X6A3ZWGjPoj/646453026_122203593056583875_6055072270495399565_n_5c9263a7.jpg
+5. Investisseurs: https://d2xsxph8kpxj0f.cloudfront.net/310519663308445010/WFcpuDgACN7X6A3ZWGjPoj/646721511_122203592630583875_4456174484904590528_n_304c4a36.jpg
+6. Projets: https://d2xsxph8kpxj0f.cloudfront.net/310519663308445010/WFcpuDgACN7X6A3ZWGjPoj/648829620_122204519726583875_7832514636555512414_n_af242fb7.jpg
+
+## Icônes
+- Icon: https://d2xsxph8kpxj0f.cloudfront.net/310519663308445010/WFcpuDgACN7X6A3ZWGjPoj/468777730_122119686818583875_2662571139557770173_n_01aeec7e.png
