@@ -3,7 +3,13 @@ import Footer from '@/components/Footer';
 import { Link } from 'wouter';
 import { Sun, Home, Tractor, Building2, Zap, TrendingUp, Leaf, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
-
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 // Images du Google Drive
 const HERO_IMAGE = 'https://drive.google.com/uc?id=1oJvO8OhP_qV_p2koU7IV38tW66coXtKH&export=view';
 const SECTION3_IMAGE = 'https://drive.google.com/uc?id=1ZAm2J2E9BWeyyQ2Kbjdf0A-lwws2p7j4&export=view';
@@ -313,7 +319,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Partners Section - Modern Infinite Marquee */}
+      {/* Partners Section - Modern Carousel */}
       <section className="py-24 bg-white border-t border-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 mb-16 text-center space-y-4">
           <motion.div
@@ -322,19 +328,20 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-black text-gray-900 uppercase tracking-tighter">NOS PARTENAIRES</h2>
-            <p className="text-xl text-gray-500 italic font-medium mt-2">Ils nous font confiance pour leur transition</p>
+            <p className="text-xl text-gray-500 italic font-medium mt-2">Ils nous font confiance</p>
             <div className="w-24 h-1.5 bg-accent mx-auto mt-6 rounded-full"></div>
           </motion.div>
         </div>
 
-        <div className="relative group overflow-hidden py-10">
-          {/* Gradient Masks for edges */}
-          <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
-
-          {/* Marquee Container */}
-          <div className="flex gap-10 mask-marquee group-hover:[animation-play-state:paused]">
-            <div className="flex gap-10 whitespace-nowrap animate-marquee">
+        <div className="container mx-auto px-12 md:px-16 py-4">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full relative"
+          >
+            <CarouselContent className="-ml-4">
               {[
                 { name: "BNA BANK", logo: "/logos/bna.png" },
                 { name: "AMEN BANK", logo: "/logos/Amen-Bank.x60352.jpg" },
@@ -343,41 +350,38 @@ export default function HomePage() {
                 { name: "UIB", logo: "/logos/UIB.png" },
                 { name: "BIAT", logo: "/logos/biat.png" },
                 { name: "ATTIJARI", logo: "/logos/attijari.png" },
-                { name: "BH BANK", logo: null },
                 { name: "ANME", logo: "/logos/anme.png" },
-                { name: "ZITOUNA", logo: null }
-              ].concat([
-                { name: "BNA BANK", logo: "/logos/bna.png" },
-                { name: "AMEN BANK", logo: "/logos/Amen-Bank.x60352.jpg" },
-                { name: "GIZ", logo: "/logos/giz.png" },
-                { name: "STEG", logo: "/logos/steg.png" },
-                { name: "UIB", logo: "/logos/UIB.png" },
-                { name: "BIAT", logo: "/logos/biat.png" },
-                { name: "ATTIJARI", logo: "/logos/attijari.png" },
-                { name: "BH BANK", logo: null },
-                { name: "ANME", logo: "/logos/anme.png" },
-                { name: "ZITOUNA", logo: null }
-              ]).map((partner, i) => (
-                <motion.div 
-                  key={i} 
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="inline-flex items-center justify-center px-12 py-8 bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 hover:border-accent/20 hover:shadow-xl transition-all duration-300 cursor-pointer min-w-[280px] h-[140px]"
-                >
-                  {partner.logo ? (
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.name} 
-                      className="max-h-full max-w-full object-contain transition-all duration-300 transform"
-                    />
-                  ) : (
-                    <span className="text-2xl font-black text-gray-300 font-serif tracking-tighter uppercase group-hover:text-gray-900 transition-colors duration-300">
-                      {partner.name}
-                    </span>
-                  )}
-                </motion.div>
+                { name: "SUNGROW", logo: "/logos/sungrow.png" },
+                { name: "VEICHI", logo: "/logos/veichi.png" },
+                { name: "CANADIAN SOLAR", logo: "/logos/canadien.png" },
+                { name: "AE SOLAR", logo: "/logos/AE SOLAR.png" },
+                { name: "LONGI", logo: "/logos/longi.png" }
+              ].map((partner, i) => (
+                <CarouselItem key={i} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                  <div className="p-1 h-full flex">
+                    <div 
+                      className="w-full flex items-center justify-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-accent/40 hover:shadow-lg transition-all duration-300 min-h-[140px] cursor-pointer"
+                    >
+                      {partner.logo ? (
+                        <img 
+                          src={partner.logo} 
+                          alt={partner.name} 
+                          className="max-h-[80px] w-auto max-w-full object-contain transition-transform duration-300 hover:scale-105"
+                        />
+                      ) : (
+                        <span className="text-xl font-bold text-gray-300 uppercase tracking-wide text-center group-hover:text-gray-900 transition-colors">
+                          {partner.name}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </CarouselItem>
               ))}
-            </div>
-          </div>
+            </CarouselContent>
+            {/* Navigation Arrows */}
+            <CarouselPrevious className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 size-10 md:size-12 border-2 border-gray-200 text-gray-600 hover:text-accent hover:border-accent hover:bg-white shadow-xl bg-white flex items-center justify-center rounded-full z-10 transition-all duration-200" />
+            <CarouselNext className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 size-10 md:size-12 border-2 border-gray-200 text-gray-600 hover:text-accent hover:border-accent hover:bg-white shadow-xl bg-white flex items-center justify-center rounded-full z-10 transition-all duration-200" />
+          </Carousel>
         </div>
       </section>
 

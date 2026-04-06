@@ -61,8 +61,55 @@ export default function Quote() {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    // Submit form data to Make.com webhook
+    try {
+      let cloudinaryUrl = '';
+
+      // 1. Si une image est sélectionnée, l'uploader sur Cloudinary d'abord
+      if (formData.invoiceFile) {
+        const cloudinaryData = new FormData();
+        cloudinaryData.append('file', formData.invoiceFile);
+        cloudinaryData.append('upload_preset', 'ecomax'); 
+        
+        const uploadRes = await fetch('https://api.cloudinary.com/v1_1/dzqk9h3hg/image/upload', {
+          method: 'POST',
+          body: cloudinaryData,
+        });
+
+        if (uploadRes.ok) {
+          const cloudResJson = await uploadRes.json();
+          cloudinaryUrl = cloudResJson.secure_url;
+        } else {
+          const errorData = await uploadRes.json();
+          console.error("Erreur Cloudinary:", errorData);
+          throw new Error(`Erreur Cloudinary: ${errorData.error?.message || 'Upload échoué'}`);
+        }
+      }
+
+      // 2. Envoyer les données au format JSON vers Make.com
+      const payload = {
+        name: formData.name,
+        phone: formData.phone,
+        status: formData.status,
+        type: formData.type,
+        governorate: formData.governorate,
+        stegRef: formData.stegRef,
+        message: formData.message,
+        invoiceFileUrl: cloudinaryUrl || null,
+      };
+
+      const response = await fetch('https://hook.eu2.make.com/5u7c5bdanevyq875yxdkvvis7xwq1t8i', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
       toast.success('Votre demande a été envoyée avec succès ! Nous vous contacterons très bientôt.');
       setFormData({
         name: '',
@@ -74,8 +121,12 @@ export default function Quote() {
         message: '',
         invoiceFile: null,
       });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (

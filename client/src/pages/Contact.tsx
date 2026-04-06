@@ -3,7 +3,13 @@ import Footer from '@/components/Footer';
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Facebook, Instagram } from 'lucide-react';
 import { toast } from 'sonner';
-
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 const CONTACT_HERO_IMAGE = '/backround images/240_F_336301102_17vyr7sr47lPiL4AhcUJtlepUwnISErJ.jpg';
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -64,7 +70,7 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: 'Adresse',
-      value: 'Route Manzel Chaker, Sfax, Tunisie',
+      value: 'Route matar Km 4, Sfax 3013',
       link: 'https://google.com/maps/place/ECOMAX/data=!4m2!3m1!1s0x0:0x46793a96e9ac56a9',
     },
     {
@@ -108,29 +114,43 @@ export default function ContactPage() {
 
       {/* Contact Info Cards */}
       <section className="py-20 bg-gray-50 relative -mt-10 z-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactInfo.map((info, index) => {
-              const Icon = info.icon;
-              return (
-                <div key={index} className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 group">
-                  <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent transition-colors duration-300">
-                    <Icon className="w-8 h-8 text-accent group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{info.title}</h3>
-                  <p className="text-gray-500 text-sm mb-4">Cliquez pour nous contacter</p>
-                  <a
-                    href={info.link}
-                    target={info.link.startsWith('http') ? '_blank' : undefined}
-                    rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="text-gray-900 hover:text-accent transition-colors font-bold text-lg whitespace-nowrap block overflow-hidden text-ellipsis"
-                  >
-                    {info.value}
-                  </a>
-                </div>
-              );
-            })}
-          </div>
+        <div className="container mx-auto px-12 md:px-16">
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="w-full relative"
+          >
+            <CarouselContent className="-ml-4 md:-ml-8">
+              {contactInfo.map((info, index) => {
+                const Icon = info.icon;
+                return (
+                  <CarouselItem key={index} className="pl-4 md:pl-8 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 group h-full flex flex-col">
+                      <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent transition-colors duration-300">
+                        <Icon className="w-8 h-8 text-accent group-hover:text-white transition-colors duration-300" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">{info.title}</h3>
+                      <p className="text-gray-500 text-sm mb-4">Cliquez pour nous contacter</p>
+                      <div className="mt-auto">
+                        <a
+                          href={info.link}
+                          target={info.link.startsWith('http') ? '_blank' : undefined}
+                          rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          className="text-gray-900 hover:text-accent transition-colors font-bold text-lg break-words block"
+                        >
+                          {info.value}
+                        </a>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            {/* Navigation Arrows */}
+            <CarouselPrevious className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 size-10 md:size-12 border-2 border-gray-200 text-gray-600 hover:text-accent hover:border-accent hover:bg-white shadow-xl bg-white flex items-center justify-center rounded-full z-10 transition-all duration-200" />
+            <CarouselNext className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 size-10 md:size-12 border-2 border-gray-200 text-gray-600 hover:text-accent hover:border-accent hover:bg-white shadow-xl bg-white flex items-center justify-center rounded-full z-10 transition-all duration-200" />
+          </Carousel>
         </div>
       </section>
 

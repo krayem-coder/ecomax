@@ -20,7 +20,7 @@ export default function ProjectsPage() {
     {
       title: 'Installation 2kWc Raccordée au Réseau',
       location: 'Sfax, Tunisie',
-      capacity: '2 kWp',
+      capacity: '2 kWc',
       description: 'Système photovoltaïque optimisé pour l\'autoconsommation résidentielle avec injection réseau.',
       image: '/images videos/ecomax/projets/raccordé réseau/2kwc/468588599_122119189676583875_5171974393940111612_n.jpg',
       gallery: [
